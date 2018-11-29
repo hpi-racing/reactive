@@ -13,7 +13,7 @@ namespace WindowsApplication
 	public partial class Form1 : Form
 	{
 		private const string FTDI_SENSOR_DESCRIPTION = "Carrera Sensor Control";
-		private const string FTDI_ACTUATOR_DESCRIPTION = "Carrera Handset Control";
+		private const string FTDI_ACTUATOR_DESCRIPTION = "Carrera Actuator Control";
 
 		private readonly Stream ActuatorStream;
 
