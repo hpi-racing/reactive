@@ -5,8 +5,10 @@ namespace WindowsApplication.Sensors
 	public enum SensorPacketType
 	{
 		Lane = 0x00,
+		Race = 0x20,
+		Junction = 0x40,
+		ActiveControllers = 0x60,
 		Position = 0x80,
-		Junction = 0x40
 	}
 
 	public abstract class SensorPacket
@@ -20,6 +22,9 @@ namespace WindowsApplication.Sensors
 				case SensorPacketType.Position:
 					return new PositionSensorPacket(timeStamp,data);
 				case SensorPacketType.Junction:
+				case SensorPacketType.Race:
+				case SensorPacketType.ActiveControllers:
+					// TODO
 					return new JunctionSensorPacket(timeStamp,data);
 			}
 

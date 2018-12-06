@@ -7,7 +7,7 @@ namespace WindowsApplication.Sensors
 {
 	public class SensorPacketReader : IDisposable
 	{
-		private const byte PACKET_TYPE_BIT_MASK = 0xC0;
+		private const byte PACKET_TYPE_BIT_MASK = 0xE0;
 		private const byte PAYLOAD_LENGTH_BIT_MASK = 0x07;
 		private const int HEADER_LENGTH = 4;
 

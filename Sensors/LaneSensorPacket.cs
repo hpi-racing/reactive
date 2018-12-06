@@ -12,25 +12,25 @@ namespace WindowsApplication.Sensors
 		public LaneSensorPacket(ushort timeStamp,byte[] data)
 			: base(timeStamp)
 		{
-			int payload = LaneSensorPacket.PayloadDataToInt(data);
+			this.TankEnabled = (bool) data[1];
+			byte actuatorData = data[0];
 
-			this.ControllerID = new[] { payload.Bit(0),payload.Bit(1),payload.Bit(2) }.ToInt();
-			this.LaneChangeButtonPressed = !payload.Bit(3);
-			this.Speed = new[] { payload.Bit(4),payload.Bit(5),payload.Bit(6),payload.Bit(7) }.ToInt();
-			this.TankEnabled = payload.Bit(8);
+			this.ControllerID = new[] { actuatorData.Bit(7),actuatorData.Bit(6),actuatorData.Bit(5) }.ToInt();
+			this.LaneChangeButtonPressed = !actuatorData.Bit(4);
+			this.Speed = new[] { actuatorData.Bit(3),actuatorData.Bit(2),actuatorData.Bit(1),actuatorData.Bit(0) }.ToInt();
 		}
 
-		private static int PayloadDataToInt(byte[] payload)
-		{
-			int result = 0;
+		//private static int PayloadDataToInt(byte[] payload)
+		//{
+			//int result = 0;
 
-			for (int i = payload.Length - 1;i >= 0;i--)
-			{
-				result <<= 8;
-				result |= payload[i];
-			}
+			//for (int i = payload.Length - 1;i >= 0;i--)
+			//{
+				//result <<= 8;
+				//result |= payload[i];
+			//}
 
-			return result;
-		}
+			//return result;
+		//}
 	}
 }

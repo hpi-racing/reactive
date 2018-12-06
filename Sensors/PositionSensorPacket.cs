@@ -14,8 +14,8 @@ namespace WindowsApplication.Sensors
 		public PositionSensorPacket(ushort timeStamp, byte[] data)
 			: base(timeStamp)
 		{
-			this.SensorID = data[0];
-			this.CarID = data[1];
+			this.CarID = data[0] >> 5;
+			this.SensorID = data[1];
 		}
 	}
 }
