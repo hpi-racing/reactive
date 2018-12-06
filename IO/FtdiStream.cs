@@ -24,8 +24,8 @@ namespace WindowsApplication.Io
 				throw new NoFtdiDevicesAvailableException();
 
 			status = device.OpenByDescription(sensorDescription);
-			if (status != FTDI.FT_STATUS.FT_OK)
-				throw new FtdiDeviceNotFoundException(sensorDescription, status);
+			//if (status != FTDI.FT_STATUS.FT_OK)
+			//	throw new FtdiDeviceNotFoundException(sensorDescription, status);
 		}
 
 		protected override void Dispose(bool disposing)

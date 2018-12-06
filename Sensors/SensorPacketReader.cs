@@ -42,7 +42,14 @@ namespace WindowsApplication.Sensors
 			if (packet == null)
 				return null;
 
-			return this.Parse(packet);
+            //MARK undo
+            //return this.Parse(packet);
+            var parsedPacket = this.Parse(packet);
+
+            // TAG package print
+            //if (parsedPacket.GetType() == typeof(LaneSensorPacket))
+                //Console.WriteLine("parsed" + (parsedPacket as LaneSensorPacket).Speed + "id" + (parsedPacket as LaneSensorPacket).ControllerID);
+            return parsedPacket;
 		}
 
 		private void ReadUntilStreamIsSynchronized()
@@ -74,7 +81,6 @@ namespace WindowsApplication.Sensors
 			while (true)
 			{
 				int read = Stream.ReadByte();
-
 				if (read == -1 || read == b)
 					return;
 			}

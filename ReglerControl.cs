@@ -34,10 +34,10 @@ namespace WindowsApplication
 		{
 			if (timestamp>0)
 			{
-				var timeSpan = TimeSpan.FromMilliseconds(timestamp - this.lastTimeStamp);
-				this.fastestLap = (this.fastestLap>timeSpan || this.lastTimeStamp==0) ? timeSpan : this.fastestLap;
+				var currentLapTime = TimeSpan.FromMilliseconds(timestamp - this.lastTimeStamp);
+				this.fastestLap = (this.fastestLap > currentLapTime || this.lastTimeStamp==0) ? currentLapTime : this.fastestLap;
 
-				this.labelCurrentLap.Text = timeSpan.ToString(@"mm\:ss\.ff");
+				this.labelCurrentLap.Text = currentLapTime.ToString(@"mm\:ss\.ff");
 				this.labelFastestLap.Text = this.fastestLap.ToString(@"mm\:ss\.ff");
 			}
 

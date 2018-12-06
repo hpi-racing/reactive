@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 
 namespace WindowsApplication.Sensors
 {
@@ -12,25 +13,36 @@ namespace WindowsApplication.Sensors
 		public LaneSensorPacket(ushort timeStamp,byte[] data)
 			: base(timeStamp)
 		{
-			this.TankEnabled = (bool) data[1];
-			byte actuatorData = data[0];
+            //TAG print packet data
+            //Console.WriteLine("new package data");
+            //Console.WriteLine(Convert.ToString(data[0], 2));
+            //Console.WriteLine(Convert.ToString(data[1], 2));
+            this.TankEnabled = (bool) new BitArray(data)[1];
+            this.TankEnabled = (bool)Convert.ToBoolean(data[1]);
+            var actuatorData = data[0];
 
-			this.ControllerID = new[] { actuatorData.Bit(7),actuatorData.Bit(6),actuatorData.Bit(5) }.ToInt();
-			this.LaneChangeButtonPressed = !actuatorData.Bit(4);
-			this.Speed = new[] { actuatorData.Bit(3),actuatorData.Bit(2),actuatorData.Bit(1),actuatorData.Bit(0) }.ToInt();
+            this.ControllerID = actuatorData >> 5;
+            this.LaneChangeButtonPressed = !Convert.ToBoolean(actuatorData & 0x10);
+            this.Speed = actuatorData & 0x0F;
 		}
 
-		//private static int PayloadDataToInt(byte[] payload)
-		//{
-			//int result = 0;
+        //private static int PayloadDataToInt(byte[] payload)
+        //{
+        //int result = 0;
 
-			//for (int i = payload.Length - 1;i >= 0;i--)
-			//{
-				//result <<= 8;
-				//result |= payload[i];
-			//}
+        //for (int i = payload.Length - 1;i >= 0;i--)
+        //{
+        //result <<= 8;
+        //result |= payload[i];
+        //}
 
-			//return result;
-		//}
-	}
+        //return result;
+        //}
+
+        public override string ToString()
+        {
+            return base.ToString() + "\ntank: " + this.TankEnabled + "\ncontrollerid: " + this.ControllerID +
+                "\nlangecng: " + this.LaneChangeButtonPressed + "\nspeed: " + this.Speed;
+        }
+    }
 }

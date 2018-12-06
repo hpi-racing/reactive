@@ -56,6 +56,8 @@ namespace WindowsApplication
 				.ObserveOn(SynchronizationContext.Current)
 				.Subscribe(psp =>
 				{
+                    // TAG package print
+                    Console.WriteLine(psp.ToString());
 					this.Controllers[psp.ControllerID].Speed = psp.Speed;
 					this.Controllers[psp.ControllerID].Pressed = psp.LaneChangeButtonPressed;
 				});
@@ -68,7 +70,7 @@ namespace WindowsApplication
 				.Subscribe (psp =>
 				{
 					this.roadMapControl1.ActivateSensor(psp.SensorID,psp.CarID);										
-					if (psp.SensorID==19 || psp.SensorID==21)
+					if (psp.SensorID==20 || psp.SensorID==21)
 						this.Controllers[psp.CarID].LapCompleted(psp.TimeStamp);
 				});
 		}
